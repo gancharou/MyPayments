@@ -3,17 +3,16 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs'
     id 'kotlin-kapt'
-    id 'com.google.dagger.hilt.android'
 }
 
 android {
     namespace 'com.example.mypayments'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.mypayments"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -34,6 +33,10 @@ android {
         jvmTarget = '1.8'
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.2"
+    }
+
     buildFeatures {
         compose true
         viewBinding true
@@ -51,18 +54,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation("androidx.fragment:fragment-ktx:1.6.2")
 
-    //Compose
-    implementation 'androidx.activity:activity-compose:1.7.2'
-    implementation "androidx.compose.ui:ui:1.5.1"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.5.1"
-    implementation 'androidx.compose.material:material:1.5.1'
-
-    //di
-    implementation 'com.google.dagger:hilt-android:2.44'
-    implementation "androidx.hilt:hilt-common:1.0.0"
-    kapt 'com.google.dagger:hilt-compiler:2.47'
-
     //Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.1")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+
+    //Compose
+    implementation 'androidx.activity:activity-compose:1.8.1'
+    implementation "androidx.compose.ui:ui:1.5.4"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.5.4"
+    implementation 'androidx.compose.material:material:1.5.4'
 }
