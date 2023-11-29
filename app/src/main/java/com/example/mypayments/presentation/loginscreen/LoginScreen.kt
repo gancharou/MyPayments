@@ -1,4 +1,4 @@
-package com.example.mypayments.presentation.authorizationscreen.widget
+package com.example.mypayments.presentation.loginscreen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
