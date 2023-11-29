@@ -1,4 +1,4 @@
-package com.example.mypayments.presentation.authorizationscreen
+package com.example.mypayments.presentation.loginscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,14 +8,15 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.example.mypayments.presentation.theme.MyPaymentsTheme
 
-class AuthorizationFragment : Fragment() {
+class LoginFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = ComposeView(requireContext()).apply {
         setContent {
             MyPaymentsTheme {
-               AuthorizationScreen()
+                LoginScreen()
             }
         }
     }
