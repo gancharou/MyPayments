@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(viewModel: LoginViewModel) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(
             modifier = Modifier.padding(horizontal = 12.dp),
@@ -23,14 +23,14 @@ fun LoginScreen() {
         ) {
             Text(text = "Здравствуйте, имя:")
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { viewModel.onGetPayments() },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(text = "Получить список платежей")
             }
         }
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { viewModel.onGoOutClick() },
             modifier = Modifier
                 .wrapContentSize()
                 .align(Alignment.BottomEnd)
