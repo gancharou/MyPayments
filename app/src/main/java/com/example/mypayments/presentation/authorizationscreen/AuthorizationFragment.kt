@@ -10,8 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mypayments.presentation.theme.MyPaymentsTheme
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class AuthorizationFragment : Fragment() {
 
     private val viewModel: AuthorizationViewModel by viewModels()
@@ -39,7 +41,6 @@ class AuthorizationFragment : Fragment() {
                     is AuthorizationEvents.RouteToLogin -> {
                         navigateToLoginFragment()
                     }
-
                     is AuthorizationEvents.ErrorLogin -> {}
                 }
             }
