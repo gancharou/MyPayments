@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.example.mypayments.presentation.theme.MyPaymentsTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     override fun onCreateView(
