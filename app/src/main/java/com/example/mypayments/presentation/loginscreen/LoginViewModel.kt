@@ -20,6 +20,6 @@ class LoginViewModel : ViewModel() {
     }
 
     fun onGetPayments() {
-        viewModelScope.launch { _events.send(LoginEvents.RouteToAuthorization) }
+        viewModelScope.launch { _events.send(LoginEvents.RouteToPayments) }
     }
 }

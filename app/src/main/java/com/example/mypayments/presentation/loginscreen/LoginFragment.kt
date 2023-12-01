@@ -39,7 +39,7 @@ class LoginFragment : Fragment() {
             viewModel.events.collect { event ->
                 when (event) {
                     is LoginEvents.RouteToPayments -> {
-
+                        navigateToPaymentsFragment()
                     }
 
                     is LoginEvents.RouteToAuthorization -> {
@@ -48,5 +48,10 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun navigateToPaymentsFragment() {
+        val directions = LoginFragmentDirections.actionLoginFragmentToPaymentsFragment()
+        findNavController().navigate(directions)
     }
 }
