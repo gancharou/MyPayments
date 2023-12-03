@@ -22,10 +22,20 @@
         <action
             android:id="@+id/action_loginFragment_to_paymentsFragment"
             app:destination="@id/paymentsFragment" />
+        <argument
+            android:name="login"
+            app:argType="string" />
+        <argument
+            android:name="token"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/paymentsFragment"
         android:name="com.example.mypayments.presentation.paymentsscreen.PaymentsFragment"
         android:label="fragment_payments"
-        tools:layout="@layout/fragment_payments" />
+        tools:layout="@layout/fragment_payments" >
+        <argument
+            android:name="token"
+            app:argType="string" />
+    </fragment>
 </navigation>

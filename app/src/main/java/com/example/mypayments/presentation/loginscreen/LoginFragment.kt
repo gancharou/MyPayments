@@ -9,12 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.mypayments.presentation.theme.MyPaymentsTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
+
+    private val safeArgs: LoginFragmentArgs by navArgs()
 
     private val viewModel: LoginViewModel by viewModels()
 
@@ -24,7 +27,7 @@ class LoginFragment : Fragment() {
     ): View = ComposeView(requireContext()).apply {
         setContent {
             MyPaymentsTheme {
-                LoginScreen(viewModel)
+                LoginScreen(viewModel, safeArgs.login)
             }
         }
     }
@@ -51,7 +54,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToPaymentsFragment() {
-        val directions = LoginFragmentDirections.actionLoginFragmentToPaymentsFragment()
+        val directions =
+            LoginFragmentDirections.actionLoginFragmentToPaymentsFragment(safeArgs.token)
         findNavController().navigate(directions)
     }
 }
