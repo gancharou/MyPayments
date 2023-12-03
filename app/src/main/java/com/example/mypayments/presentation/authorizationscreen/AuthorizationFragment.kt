@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -41,7 +42,24 @@ class AuthorizationFragment : Fragment() {
                     is AuthorizationEvents.RouteToLogin -> {
                         navigateToLoginFragment()
                     }
-                    is AuthorizationEvents.ErrorLogin -> {}
+
+                    is AuthorizationEvents.ErrorLogin -> {
+                        Toast.makeText(
+                            requireContext(),
+                            "Неправильные логин или пароль!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+
+                    is AuthorizationEvents.EmptyField -> {
+                        Toast.makeText(
+                            requireContext(),
+                            "Заполните поля!",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
                 }
             }
         }
