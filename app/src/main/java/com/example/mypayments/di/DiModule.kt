@@ -39,14 +39,6 @@ class DiModule {
     fun provideOkHttpClient(logging: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(logging)
-            .addInterceptor {
-                val newRequest =
-                    it.request().newBuilder()
-                        .addHeader(name = "app-key", value = "12345")
-                        .addHeader(name = "v", value = "1")
-                        .build()
-                it.proceed(newRequest)
-            }
             .build()
     }
 
