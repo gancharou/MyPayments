@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.mypayments.presentation.theme.MyPaymentsTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class PaymentsFragment : Fragment() {
+
+    private val safeArgs: PaymentsFragmentArgs by navArgs()
 
     private val viewModel: PaymentsViewModel by viewModels {
         viewModelFactory.create("")

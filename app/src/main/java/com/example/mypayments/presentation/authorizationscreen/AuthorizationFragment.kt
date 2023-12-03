@@ -40,7 +40,7 @@ class AuthorizationFragment : Fragment() {
             viewModel.events.collect { event ->
                 when (event) {
                     is AuthorizationEvents.RouteToLogin -> {
-                        navigateToLoginFragment()
+                        navigateToLoginFragment(event.login, event.token)
                     }
 
                     is AuthorizationEvents.ErrorLogin -> {
@@ -65,9 +65,9 @@ class AuthorizationFragment : Fragment() {
         }
     }
 
-    private fun navigateToLoginFragment() {
+    private fun navigateToLoginFragment(login: String, token: String) {
         val directions =
-            AuthorizationFragmentDirections.actionAuthorizationFragmentToLoginFragment()
+            AuthorizationFragmentDirections.actionAuthorizationFragmentToLoginFragment(login, token)
         findNavController().navigate(directions)
     }
 }
