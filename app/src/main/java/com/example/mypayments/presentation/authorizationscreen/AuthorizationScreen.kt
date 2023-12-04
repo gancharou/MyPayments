@@ -36,26 +36,35 @@ fun AuthorizationScreen(viewModel: AuthorizationViewModel) {
             Text(text = "Авторизация:")
 
             val textLogin = rememberSaveable { mutableStateOf("") }
-            Login(textLogin)
+            TextLogin(textLogin)
 
             val textPassword = rememberSaveable { mutableStateOf("") }
-            Password(textPassword)
-            Button(
-                onClick = {
-                    viewModel.goToLogin(textLogin.value, textPassword.value)
-                    textLogin.value = ""
-                    textPassword.value = ""
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = "Войти")
-            }
+            TextPassword(textPassword)
+            ButtonLogIn(viewModel, textLogin, textPassword)
         }
     }
 }
 
 @Composable
-private fun Password(textPassword: MutableState<String>) {
+private fun ButtonLogIn(
+    viewModel: AuthorizationViewModel,
+    textLogin: MutableState<String>,
+    textPassword: MutableState<String>
+) {
+    Button(
+        onClick = {
+            viewModel.goToLogin(textLogin.value, textPassword.value)
+            textLogin.value = ""
+            textPassword.value = ""
+        },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(text = "Войти")
+    }
+}
+
+@Composable
+private fun TextPassword(textPassword: MutableState<String>) {
     val passwordVisible = rememberSaveable { mutableStateOf(false) }
     TextField(
         value = textPassword.value,
@@ -82,7 +91,7 @@ private fun Password(textPassword: MutableState<String>) {
 }
 
 @Composable
-private fun Login(textLogin: MutableState<String>) {
+private fun TextLogin(textLogin: MutableState<String>) {
     TextField(
         value = textLogin.value,
         onValueChange = {
