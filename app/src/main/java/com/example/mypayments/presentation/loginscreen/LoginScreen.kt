@@ -32,7 +32,7 @@ fun LoginScreen(viewModel: LoginViewModel, login: String) {
 private fun ButtonGoOut(viewModel: LoginViewModel, modifier: Modifier) {
     Button(
         onClick = { viewModel.onGoOutClick() },
-        modifier = Modifier
+        modifier = modifier
             .wrapContentSize()
             .padding(bottom = 12.dp, end = 12.dp)
     ) {
