@@ -17,5 +17,5 @@ internal fun List<PaymentsDTO.Response>.toDomain() = map {
     it.toDomain()
 }
 
-private fun PaymentsDTO.Response.toDomain() =
+internal fun PaymentsDTO.Response.toDomain() =
     Payment(id = id, title = title, amount = amount, created = created)

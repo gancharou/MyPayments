@@ -11,7 +11,7 @@ data class PaymentsDTO(
 ) {
     data class Response(
         @SerializedName("amount")
-        val amount: Double?,
+        val amount: Any?,
         @SerializedName("created")
         val created: Int?,
         @SerializedName("id")
