@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.mypayments.R
 import com.example.mypayments.presentation.theme.MyPaymentsTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -46,7 +47,7 @@ class AuthorizationFragment : Fragment() {
                     is AuthorizationEvents.ErrorLogin -> {
                         Toast.makeText(
                             requireContext(),
-                            "Неправильные логин или пароль!",
+                            getString(R.string.wrong_login_or_password),
                             Toast.LENGTH_SHORT
                         )
                             .show()
@@ -55,7 +56,16 @@ class AuthorizationFragment : Fragment() {
                     is AuthorizationEvents.EmptyField -> {
                         Toast.makeText(
                             requireContext(),
-                            "Заполните поля!",
+                            getString(R.string.fill_in_fields),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+
+                    is AuthorizationEvents.ErrorOther -> {
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.error_other),
                             Toast.LENGTH_SHORT
                         )
                             .show()

@@ -1,5 +1,6 @@
 package com.example.mypayments.presentation.authorizationscreen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mypayments.domain.Authorization
@@ -14,8 +15,11 @@ import kotlinx.coroutines.launch
 sealed interface AuthorizationEvents {
     object ErrorLogin : AuthorizationEvents
     object EmptyField : AuthorizationEvents
+    object ErrorOther : AuthorizationEvents
     data class RouteToLogin(val login: String, val token: String) : AuthorizationEvents
 }
+
+const val TAG_ERROR = "Error"
 
 @HiltViewModel
 class AuthorizationViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
@@ -31,8 +35,13 @@ class AuthorizationViewModel @Inject constructor(private val repository: Reposit
             }
         } else {
             val authorization = Authorization(login = login, password = password)
+            login(authorization)
+        }
+    }
 
-            viewModelScope.launch {
+    private fun login(authorization: Authorization) {
+        viewModelScope.launch {
+            try {
                 when (val response = repository.login(authorization)) {
                     is ResponseAuthorization.Successful -> {
                         _events.send(
@@ -47,6 +56,9 @@ class AuthorizationViewModel @Inject constructor(private val repository: Reposit
                         _events.send(AuthorizationEvents.ErrorLogin)
                     }
                 }
+            } catch (throwable: Throwable) {
+                viewModelScope.launch { _events.send(AuthorizationEvents.ErrorOther) }
+                Log.d(TAG_ERROR, throwable.message.toString())
             }
         }
     }
