@@ -21,22 +21,31 @@ fun LoginScreen(viewModel: LoginViewModel, login: String) {
             modifier = Modifier.padding(horizontal = 12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Text(text = "Здравствуйте, $login:")
-            Button(
-                onClick = { viewModel.onGetPayments() },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = "Получить список платежей")
-            }
+            Text(text = "Здравствуйте, $login!")
+            ButtonGoToPayments(viewModel)
         }
-        Button(
-            onClick = { viewModel.onGoOutClick() },
-            modifier = Modifier
-                .wrapContentSize()
-                .align(Alignment.BottomEnd)
-                .padding(bottom = 12.dp, end = 12.dp)
-        ) {
-            Text(text = "Выйти")
-        }
+        ButtonGoOut(viewModel, Modifier.align(Alignment.BottomEnd))
+    }
+}
+
+@Composable
+private fun ButtonGoOut(viewModel: LoginViewModel, modifier: Modifier) {
+    Button(
+        onClick = { viewModel.onGoOutClick() },
+        modifier = Modifier
+            .wrapContentSize()
+            .padding(bottom = 12.dp, end = 12.dp)
+    ) {
+        Text(text = "Выйти")
+    }
+}
+
+@Composable
+private fun ButtonGoToPayments(viewModel: LoginViewModel) {
+    Button(
+        onClick = { viewModel.onGetPayments() },
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(text = "Получить список платежей")
     }
 }

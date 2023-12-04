@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">My Payments</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="wrong_login_or_password">Неправильные логин или пароль!</string>
+    <string name="fill_in_fields">Заполните поля!</string>
+    <string name="error_other">Ошибка! В первую очередь проверьте интернет-соединение!</string>
 </resources>

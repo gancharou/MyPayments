@@ -10,9 +10,11 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import javax.inject.Inject
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 data class PaymentsViewState(
@@ -20,6 +22,12 @@ data class PaymentsViewState(
 )
 
 private fun initPaymentsViewState() = PaymentsViewState(payments = emptyList())
+
+sealed interface PaymentsEvents {
+    object Error : PaymentsEvents
+}
+
+const val TAG_ERROR = "Error"
 
 class PaymentsViewModel @Inject constructor(
     private val token: String,
@@ -36,13 +44,23 @@ class PaymentsViewModel @Inject constructor(
     )
     val state: StateFlow<PaymentsViewState> get() = _state.asStateFlow()
 
+    private val _events = Channel<PaymentsEvents>()
+    val events get() = _events.receiveAsFlow()
+
     init {
+        getPayments()
+    }
+
+    private fun getPayments() {
         viewModelScope.launch {
             try {
                 val paymentsFromNW = repository.getPayments(token)
                 _state.emit(state.value.copy(payments = paymentsFromNW))
             } catch (throwable: Throwable) {
-                Log.d("error", throwable.message.toString())
+                viewModelScope.launch {
+                    _events.send(PaymentsEvents.Error)
+                }
+                Log.d(TAG_ERROR, throwable.message.toString())
             }
         }
     }
