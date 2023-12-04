@@ -18,7 +18,7 @@ class PaymentsFragment : Fragment() {
     private val safeArgs: PaymentsFragmentArgs by navArgs()
 
     private val viewModel: PaymentsViewModel by viewModels {
-        viewModelFactory.create("")
+        viewModelFactory.create(safeArgs.token)
     }
 
     @Inject
