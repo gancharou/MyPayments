@@ -9,5 +9,33 @@
         android:id="@+id/authorizationFragment"
         android:name="com.example.mypayments.presentation.authorizationscreen.AuthorizationFragment"
         android:label="fragment_authorization"
-        tools:layout="@layout/fragment_authorization" />
+        tools:layout="@layout/fragment_authorization" >
+        <action
+            android:id="@+id/action_authorizationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.mypayments.presentation.loginscreen.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_paymentsFragment"
+            app:destination="@id/paymentsFragment" />
+        <argument
+            android:name="login"
+            app:argType="string" />
+        <argument
+            android:name="token"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentsFragment"
+        android:name="com.example.mypayments.presentation.paymentsscreen.PaymentsFragment"
+        android:label="fragment_payments"
+        tools:layout="@layout/fragment_payments" >
+        <argument
+            android:name="token"
+            app:argType="string" />
+    </fragment>
 </navigation>
