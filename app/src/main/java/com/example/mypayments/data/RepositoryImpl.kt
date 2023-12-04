@@ -6,10 +6,6 @@ import com.example.mypayments.domain.Payment
 import com.example.mypayments.domain.Repository
 import com.example.mypayments.domain.ResponseAuthorization
 import com.google.gson.JsonObject
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 
 class RepositoryImpl(private val apiService: MyPaymentsAPI) : Repository {
     override suspend fun login(authorization: Authorization): ResponseAuthorization {
@@ -19,7 +15,7 @@ class RepositoryImpl(private val apiService: MyPaymentsAPI) : Repository {
         return apiService.authorization(jsonObject).toDomain()
     }
 
-    override suspend fun getPayments(token: String): StateFlow<List<Payment>> {
-        return apiService.getPayments(token).map { it.toDomain() }.stateIn(GlobalScope)
+    override suspend fun getPayments(token: String): List<Payment> {
+        return apiService.getPayments(token).response.toDomain()
     }
 }
